@@ -16,12 +16,12 @@ const password = Yup.string()
   .matches(/[^\w]/, "Password requires a symbol")
   .required("Password is required");
 
-export const validationLoginSchema = Yup.object({
+export const VALIDATION_lOGIN_SCHEMA = Yup.object({
   username,
   password,
 });
 
-export const validationRegistrationSchema = Yup.object({
+export const VALIDATION_REGISTRATION_SCHEMA = Yup.object({
   username,
   email,
   password,
