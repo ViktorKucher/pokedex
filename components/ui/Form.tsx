@@ -3,7 +3,7 @@ import { LoginAuthorize, RegistrationAuthorize } from "@/types/auth";
 import { IForm } from "@/types/form";
 import { Input } from "./Input";
 import { Title } from "./Title";
-import { MessageError, MessageSuccess } from "./Message";
+import { TextMessageError, TextMessageSuccess } from "./Message";
 
 export const Form = ({
   title,
@@ -28,11 +28,11 @@ export const Form = ({
               error={errors[item.label as keyof typeof errors]}
             />
             {errors[item.label as keyof typeof errors] ? (
-              <MessageError>
+              <TextMessageError>
                 {errors[item.label as keyof typeof errors]}
-              </MessageError>
+              </TextMessageError>
             ) : (
-              <MessageSuccess>Well done!</MessageSuccess>
+              <TextMessageSuccess>Well done!</TextMessageSuccess>
             )}
           </div>
         );
