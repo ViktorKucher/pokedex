@@ -1,4 +1,3 @@
-import { styleInput } from "@/constants/ui";
 import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 
 interface IInput {
@@ -7,7 +6,18 @@ interface IInput {
   type?: HTMLInputTypeAttribute;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   value?: string;
+  error?: string;
 }
+
+const styleDefaultInput = "text-black p-2 rounded-md";
+
+const styleInput = {
+  text: styleDefaultInput,
+  password: styleDefaultInput,
+  email: styleDefaultInput,
+  file: "border-1 file:text-white file:rounded-md file:p-2 file:bg-blue-700 file:hover:bg-blue-600",
+  error: styleDefaultInput + " border-2 border-red-500",
+};
 
 export const Input = ({
   name,
@@ -15,15 +25,20 @@ export const Input = ({
   type,
   onChange,
   value,
+  error,
 }: IInput) => {
   return (
-    <input
-      className={styleInput[type as keyof typeof styleInput]}
-      name={name}
-      placeholder={placeholder}
-      type={type}
-      onChange={onChange}
-      value={value}
-    />
+    <>
+      <input
+        className={
+          error ? styleInput.error : styleInput[type as keyof typeof styleInput]
+        }
+        name={name}
+        placeholder={placeholder}
+        type={type}
+        onChange={onChange}
+        value={value}
+      />
+    </>
   );
 };
