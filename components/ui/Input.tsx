@@ -1,4 +1,5 @@
-import { ChangeEventHandler, HTMLInputTypeAttribute, Key } from "react";
+import { styleInput } from "@/constants/ui";
+import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
 
 interface IInput {
   name?: string;
@@ -7,12 +8,7 @@ interface IInput {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   value?: string;
 }
-const styleInput = {
-  text: "text-black p-2 rounded-md",
-  password: "text-black p-2 rounded-md",
-  email: "text-black p-2 rounded-md",
-  file: "border-1 file:text-white file:rounded-md file:p-2 file:bg-blue-700 file:hover:bg-blue-600",
-};
+
 export const Input = ({
   name,
   placeholder,
