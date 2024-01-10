@@ -28,7 +28,6 @@ export const authConfig: AuthOptions = {
       },
       async authorize(credentials, req) {
         const { username, password } = credentials as LoginAuthorize;
-        console.log({ id: "1", username, password })
         const data = { id: "1", username, password }
         return data as User ;
       },

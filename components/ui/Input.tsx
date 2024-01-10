@@ -9,14 +9,14 @@ interface IInput {
   error?: string;
 }
 
-const styleDefaultInput = "text-black p-2 rounded-md";
+const STYLE_DEFAULT_INPUT = "text-black p-2 rounded-md w-full";
 
 const styleInput = {
-  text: styleDefaultInput,
-  password: styleDefaultInput,
-  email: styleDefaultInput,
+  text: STYLE_DEFAULT_INPUT,
+  password: STYLE_DEFAULT_INPUT,
+  email: STYLE_DEFAULT_INPUT,
   file: "border-1 file:text-white file:rounded-md file:p-2 file:bg-blue-700 file:hover:bg-blue-600",
-  error: styleDefaultInput + " border-2 border-red-500",
+  error: STYLE_DEFAULT_INPUT + " border-2 border-red-500",
 };
 
 export const Input = ({
