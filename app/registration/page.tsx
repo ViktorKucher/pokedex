@@ -1,9 +1,9 @@
-import { SingUP } from "@/components/SignUP";
+import { Registration } from "@/components/Registration";
 
-export default function Registration() {
+export default function RegistrationPage() {
   return (
     <main className='flex flex-col items-center p-0 h-screen justify-center'>
-      <SingUP/>
+      <Registration/>
     </main>
   )
 }

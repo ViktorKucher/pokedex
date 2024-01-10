@@ -1,32 +1,32 @@
 "use client";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useFormik } from "formik";
 import { Form } from "./ui/Form";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { SocialButtons } from "./SocialButtons";
 import { Button } from "./ui/Button";
 import Link from "next/link";
 import { VALIDATION_lOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
+import { useSessionRedirect } from "@/hooks/useSessionRedirect";
+import { NotificationError } from "./ui/Message";
+import { useState } from "react";
 
 export const Login = () => {
-  const router = useRouter();
-  const session = useSession();
-  useEffect(() => {
-    if (session.data?.user) {
-      router.push("/pokedex");
-    }
-  }, [session, router]);
+  const [notification, setNotification] = useState<string>();
+  const navigation = useSessionRedirect();
+  navigation("/pokedex");
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     onSubmit: async (values) => {
-      const res = await signIn("login", {
-        username: values.username,
+      await signIn("login", {
+        email: values.email,
         password: values.password,
+        redirect: false,
+      }).then((res) => {
+        res?.error && setNotification(res.error);
       });
     },
     validationSchema: VALIDATION_lOGIN_SCHEMA,
@@ -47,6 +47,7 @@ export const Login = () => {
         <Link href="/registration">Registration</Link>
       </Button>
       <SocialButtons />
+      <NotificationError notification={notification} />
     </div>
   );
 };
