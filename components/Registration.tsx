@@ -9,7 +9,8 @@ import { VALIDATION_REGISTRATION_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_REGISTRATION_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
 import { useState } from "react";
-import { NotificationError } from "./ui/Message";
+import { NotificationError } from "./ui/Notification";
+import { EMPTY_STRING } from "@/constants/default";
 
 export const Registration = () => {
   const [notification,setNotification] = useState<string>()
@@ -17,9 +18,9 @@ export const Registration = () => {
   navigation("/pokedex");
   const formik = useFormik({
     initialValues: {
-      name: "",
-      password: "",
-      email: "",
+      name: EMPTY_STRING,
+      password: EMPTY_STRING,
+      email: EMPTY_STRING,
     },
     onSubmit: async (values) =>
       await signIn("registration", {

@@ -8,8 +8,9 @@ import Link from "next/link";
 import { VALIDATION_lOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
-import { NotificationError } from "./ui/Message";
+import { NotificationError } from "./ui/Notification";
 import { useState } from "react";
+import { EMPTY_STRING } from "@/constants/default";
 
 export const Login = () => {
   const [notification, setNotification] = useState<string>();
@@ -17,8 +18,8 @@ export const Login = () => {
   navigation("/pokedex");
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: EMPTY_STRING,
+      password: EMPTY_STRING,
     },
     onSubmit: async (values) => {
       await signIn("login", {
