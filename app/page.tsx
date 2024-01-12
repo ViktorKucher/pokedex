@@ -1,9 +1,9 @@
-import { Authorization } from '@/components/Authorization'
+import { Authorization } from "@/components/Authorization";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className='flex h-screen justify-center'>
-      <Authorization/>
+    <main className="flex h-screen justify-center">
+      <Authorization />
     </main>
-  )
+  );
 }

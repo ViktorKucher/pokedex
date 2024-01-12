@@ -1,8 +1,6 @@
 import { AuthUser } from "@/types/auth";
 import { Collection, MongoClient, WithId } from "mongodb";
 const client = new MongoClient(process.env.MONGODB_URI!);
-const db = client.db("pokedex");
-const userCollection = db.collection<AuthUser>("users");
 
 const connectUserCollection = async (): Promise<Collection<AuthUser>> => {
   await client.connect();

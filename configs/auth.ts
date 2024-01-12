@@ -1,27 +1,15 @@
-import { LoginAuthorize, RegistrationAuthorize, User } from "@/types/auth";
+import {
+  FacebookProfile,
+  LoginAuthorize,
+  RegistrationAuthorize,
+  User,
+} from "@/types/auth";
 import { randomBytes, randomUUID } from "crypto";
 import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { authAuthorization, login, registration } from "@/services/auth";
-
-type FacebookProfile = {
-  id: string;
-  name: string;
-  email?: string;
-  picture: {
-    data: {
-      url: string;
-    };
-  };
-};
-type GoogleProfile = {
-  sub: string;
-  name: string;
-  email: string;
-  picture: string;
-};
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -92,25 +80,18 @@ export const authConfig: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log("account");
-      console.log(account);
-      console.log("user");
-      console.log(user);
       if (user) {
-        if (account?.type=== "oauth" && account?.provider) {
-            const { id, name, image, email } = user;
-            const socialUser = await authAuthorization(
-              account.provider,
-              {
-                id,
-                email,
-                name,
-                image,
-              }
-            );
-            if (socialUser) {
-              token.user = socialUser;
-            }
+        if (account?.type === "oauth" && account?.provider) {
+          const { id, name, image, email } = user;
+          const socialUser = await authAuthorization(account.provider, {
+            id,
+            email,
+            name,
+            image,
+          });
+          if (socialUser) {
+            token.user = socialUser;
+          }
         } else {
           token.user = user;
         }

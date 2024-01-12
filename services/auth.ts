@@ -75,6 +75,7 @@ export const registration = async (
     };
   }
 };
+
 export const socialCreateOrFind = async (
   user?: AuthUser | null
 ): Promise<WithId<AuthUser> | null> => {
@@ -117,22 +118,3 @@ export const authAuthorization = async (
   }
   return null;
 };
-//await userCollection.findOneAndUpdate({ social_id:user.social_id },{$set:{...user}},{upsert:true});
-// export const socialAuthorization = async (social_id:string,name:string,picture:string,email?:string):Promise<User|WithId<AuthUser>> => {
-//   console.log("start")
-//   const isUser = await findUserSocial(social_id);
-//     console.log("isUser")
-//     console.log(isUser)
-//     if (isUser) {
-//       return isUser
-//     }
-//     const user = new UserModel({
-//       name,
-//       email,
-//       picture,
-//       social_id
-//     }).save();
-//     console.log("user")
-//     console.log(user)
-//     return user
-//   }
