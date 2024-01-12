@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const username = Yup.string()
+const name = Yup.string()
   .min(6, "Username must be 6 characters long")
   .required("Username is required");
 
@@ -17,12 +17,12 @@ const password = Yup.string()
   .required("Password is required");
 
 export const VALIDATION_lOGIN_SCHEMA = Yup.object({
-  username,
+  email,
   password,
 });
 
 export const VALIDATION_REGISTRATION_SCHEMA = Yup.object({
-  username,
+  name,
   email,
   password,
 });
