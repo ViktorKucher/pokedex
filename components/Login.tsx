@@ -8,12 +8,10 @@ import Link from "next/link";
 import { VALIDATION_lOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
-import { NotificationError } from "./ui/Notification";
-import { useState } from "react";
 import { EMPTY_STRING } from "@/constants/default";
+import { toast } from "sonner";
 
 export const Login = () => {
-  const [notification, setNotification] = useState<string>();
   const navigation = useSessionRedirect();
   navigation("/pokedex");
   const formik = useFormik({
@@ -27,7 +25,7 @@ export const Login = () => {
         password: values.password,
         redirect: false,
       }).then((res) => {
-        res?.error && setNotification(res.error);
+        res?.error && toast.error(res.error);
       });
     },
     validationSchema: VALIDATION_lOGIN_SCHEMA,
@@ -48,7 +46,6 @@ export const Login = () => {
         <Link href="/registration">Registration</Link>
       </Button>
       <SocialButtons />
-      <NotificationError notification={notification} />
     </div>
   );
 };

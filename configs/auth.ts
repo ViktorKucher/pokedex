@@ -1,42 +1,58 @@
-import { LoginAuthorize, RegistrationAuthorize } from "@/types/auth";
+import {
+  FacebookProfile,
+  LoginAuthorize,
+  RegistrationAuthorize,
+  User,
+} from "@/types/auth";
 import { randomBytes, randomUUID } from "crypto";
-import type { AuthOptions, User } from "next-auth";
+import type { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
+import { authAuthorization, login, registration } from "@/services/auth";
 
 export const authConfig: AuthOptions = {
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      profile(profile: FacebookProfile) {
+        return {
+          id: profile.id,
+          name: profile.name,
+          image: profile.picture.data.url,
+        };
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
     Credentials({
-      id:'login',
+      id: "login",
       name: "login",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "Name" },
+        email: { label: "Email", type: "email", placeholder: "Email" },
         password: {
           label: "Password",
           type: "password",
           placeholder: "Password",
         },
       },
-      async authorize(credentials, req) {
-        const { username, password } = credentials as LoginAuthorize;
-        const data = { id: "1", username, password }
-        return data as User ;
+      async authorize(credentials) {
+        const { email, password } = credentials as LoginAuthorize;
+        const resault = await login(email, password);
+        if (resault.data["message" as keyof typeof resault.data]) {
+          throw new Error(resault.data["message" as keyof typeof resault.data]);
+        }
+        return resault.data as User;
       },
     }),
     Credentials({
-      id:'registration',
+      id: "registration",
       name: "registration",
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "Name" },
+        name: { label: "Username", type: "text", placeholder: "Name" },
         password: {
           label: "Password",
           type: "password",
@@ -44,10 +60,13 @@ export const authConfig: AuthOptions = {
         },
         email: { label: "Email", type: "email", placeholder: "Email" },
       },
-      async authorize(credentials, req) {
-        const { username, password, email } = credentials as RegistrationAuthorize;
-        const data = { id: "1", username, password,email}
-        return data as User ;
+      async authorize(credentials) {
+        const { name, password, email } = credentials as RegistrationAuthorize;
+        const resault = await registration(email, password, name);
+        if (resault.data["message" as keyof typeof resault.data]) {
+          throw new Error(resault.data["message" as keyof typeof resault.data]);
+        }
+        return resault.data as User;
       },
     }),
   ],
@@ -56,19 +75,32 @@ export const authConfig: AuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 24 * 60 * 60,
     generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString("hex")
-    }
+      return randomUUID?.() ?? randomBytes(32).toString("hex");
+    },
   },
   callbacks: {
+    async jwt({ token, user, account }) {
+      if (user) {
+        if (account?.type === "oauth" && account?.provider) {
+          const { id, name, image, email } = user;
+          const socialUser = await authAuthorization(account.provider, {
+            id,
+            email,
+            name,
+            image,
+          });
+          if (socialUser) {
+            token.user = socialUser;
+          }
+        } else {
+          token.user = user;
+        }
+      }
+      return token;
+    },
     async session({ session, token }) {
       session.user = token.user;
       return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.user = user;
-      }
-      return token;
     },
   },
 };

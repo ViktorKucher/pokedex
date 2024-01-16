@@ -8,12 +8,10 @@ import Link from "next/link";
 import { VALIDATION_REGISTRATION_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_REGISTRATION_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
-import { useState } from "react";
-import { NotificationError } from "./ui/Notification";
 import { EMPTY_STRING } from "@/constants/default";
+import { toast } from "sonner";
 
 export const Registration = () => {
-  const [notification,setNotification] = useState<string>()
   const navigation = useSessionRedirect();
   navigation("/pokedex");
   const formik = useFormik({
@@ -29,7 +27,7 @@ export const Registration = () => {
         email: values.email,
         redirect:false
       }).then(res=>{
-        res?.error && setNotification(res.error);
+        res?.error && toast.error(res.error)
       }),
     validationSchema: VALIDATION_REGISTRATION_SCHEMA,
   });
@@ -49,7 +47,6 @@ export const Registration = () => {
         <Link href="/">Login</Link>
       </Button>
       <SocialButtons />
-      <NotificationError notification={notification}/>
     </div>
   );
 };
