@@ -10,6 +10,7 @@ import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import { authAuthorization, login, registration } from "@/services/auth";
+import {ENCODING, MAX_AGE_NUMBER, SIZE_TOKEN, STRATEGY_TOKEN, UPDATE_AGE_NUMBER} from "@/constants/default";
 
 export const authConfig: AuthOptions = {
   providers: [
@@ -41,11 +42,11 @@ export const authConfig: AuthOptions = {
       },
       async authorize(credentials) {
         const { email, password } = credentials as LoginAuthorize;
-        const resault = await login(email, password);
-        if (resault.data["message" as keyof typeof resault.data]) {
-          throw new Error(resault.data["message" as keyof typeof resault.data]);
+        const result = await login(email, password);
+        if (result.data["message" as keyof typeof result.data]) {
+          throw new Error(result.data["message" as keyof typeof result.data]);
         }
-        return resault.data as User;
+        return result.data as User;
       },
     }),
     Credentials({
@@ -62,20 +63,20 @@ export const authConfig: AuthOptions = {
       },
       async authorize(credentials) {
         const { name, password, email } = credentials as RegistrationAuthorize;
-        const resault = await registration(email, password, name);
-        if (resault.data["message" as keyof typeof resault.data]) {
-          throw new Error(resault.data["message" as keyof typeof resault.data]);
+        const result = await registration(email, password, name);
+        if (result.data["message" as keyof typeof result.data]) {
+          throw new Error(result.data["message" as keyof typeof result.data]);
         }
-        return resault.data as User;
+        return result.data as User;
       },
     }),
   ],
   session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
-    updateAge: 24 * 60 * 60,
+    strategy: STRATEGY_TOKEN,
+    maxAge: MAX_AGE_NUMBER,
+    updateAge: UPDATE_AGE_NUMBER,
     generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString("hex");
+      return randomUUID?.() ?? randomBytes(SIZE_TOKEN).toString(ENCODING);
     },
   },
   callbacks: {

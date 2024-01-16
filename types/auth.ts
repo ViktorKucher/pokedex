@@ -17,9 +17,9 @@ export type User = {
   picture?:string
 };
 
-export type DataResault<T> = T | {message:string}
-export type Resault<T> = {
-  data: DataResault<T>;
+export type DataResult<T> = T | {message:string}
+export type Result<T> = {
+  data: DataResult<T>;
   status: number;
 };
 

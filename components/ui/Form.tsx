@@ -3,7 +3,7 @@ import { LoginAuthorize, RegistrationAuthorize } from "@/types/auth";
 import { IForm } from "@/types/form";
 import { Input } from "./Input";
 import { Title } from "./Title";
-import { TextMessageError, TextMessageSuccess } from "./Message";
+import {TextMessageError, TextMessageNeedText, TextMessageSuccess} from "./Message";
 
 export const Form = ({
   title,
@@ -13,6 +13,7 @@ export const Form = ({
   values,
   errors,
 }: IForm<LoginAuthorize | RegistrationAuthorize>) => {
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <Title>{title}</Title>
@@ -31,7 +32,7 @@ export const Form = ({
               <TextMessageError>
                 {errors[item.label as keyof typeof errors]}
               </TextMessageError>
-            ) : (
+            ) : values[item.label as keyof typeof values].length === 0 ? <TextMessageNeedText>Please write text!</TextMessageNeedText> : (
               <TextMessageSuccess>Well done!</TextMessageSuccess>
             )}
           </div>

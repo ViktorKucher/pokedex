@@ -5,7 +5,7 @@ import { Form } from "./ui/Form";
 import { SocialButtons } from "./SocialButtons";
 import { Button } from "./ui/Button";
 import Link from "next/link";
-import { VALIDATION_lOGIN_SCHEMA } from "@/constants/yupSchemas";
+import { VALIDATION_LOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
 import { EMPTY_STRING } from "@/constants/default";
@@ -28,7 +28,7 @@ export const Login = () => {
         res?.error && toast.error(res.error);
       });
     },
-    validationSchema: VALIDATION_lOGIN_SCHEMA,
+    validationSchema: VALIDATION_LOGIN_SCHEMA,
   });
 
   return (
