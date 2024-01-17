@@ -5,10 +5,10 @@ import { Button } from "./ui/Button";
 import { Login } from "./Login";
 
 export const Authorization = () => {
-  const {data} = useSession();
+  const {data,status} = useSession();
   return (
     <div className="flex flex-col m-0 gap-2 w-full max-w-64 items-center p-0 h-screen justify-center">
-      {data ? (
+      {status==='authenticated' ? (
         <>
           <Button>
             <Link href="/pokedex">

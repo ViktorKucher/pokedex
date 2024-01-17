@@ -25,15 +25,15 @@ export const Registration = () => {
         name: values.name,
         password: values.password,
         email: values.email,
-        redirect:false
-      }).then(res=>{
-        res?.error && toast.error(res.error)
+        redirect: false,
+      }).then((res) => {
+        res?.error && toast.error(res.error);
       }),
     validationSchema: VALIDATION_REGISTRATION_SCHEMA,
   });
 
   return (
-    <div className="flex flex-col m-0 gap-2">
+    <div className="flex flex-col m-0 gap-2 max-w-60">
       <Form
         title={"Registration"}
         handleSubmit={formik.handleSubmit}
@@ -43,9 +43,9 @@ export const Registration = () => {
         errors={formik.errors}
       />
       <span className="text-center">or</span>
-      <Button>
-        <Link href="/">Login</Link>
-      </Button>
+      <Link href="/" className="block w-full">
+        <Button>Login</Button>
+      </Link>
       <SocialButtons />
     </div>
   );
