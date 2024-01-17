@@ -1,9 +1,11 @@
+import { EMPTY_STRING } from "@/constants/default";
+
 type LoaderType = {
   typeLoading?: "fullPage";
 };
 const loaderStyle = {
     'fullPage':'flex flex-col m-0 gap-2 w-full max-w-64 items-center p-0 h-screen justify-center',
-    undefined:''
+    undefined:EMPTY_STRING
 }
 export const Loader = ({ typeLoading }: LoaderType) => {
   return (
