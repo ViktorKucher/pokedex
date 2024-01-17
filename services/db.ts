@@ -4,6 +4,7 @@ const client = new MongoClient(process.env.MONGODB_URI!);
 
 const connectUserCollection = async (): Promise<Collection<AuthUser>> => {
   await client.connect();
+  console.log("connection database")
   const db = client.db("pokedex");
   return db.collection<AuthUser>("users");
 };

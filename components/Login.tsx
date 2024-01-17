@@ -32,7 +32,7 @@ export const Login = () => {
   });
 
   return (
-    <div className="flex flex-col m-0 gap-2">
+    <div className="flex flex-col m-0 gap-2 max-w-60">
       <Form
         title={"Login"}
         handleSubmit={formik.handleSubmit}
@@ -42,9 +42,9 @@ export const Login = () => {
         errors={formik.errors}
       />
       <span className="text-center">or</span>
-      <Button>
-        <Link href="/registration">Registration</Link>
-      </Button>
+      <Link href="/registration" className="block w-full">
+        <Button>Registration</Button>
+      </Link>
       <SocialButtons />
     </div>
   );
