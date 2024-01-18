@@ -1,12 +1,13 @@
-import { AuthUser, NextAuthType, Resault, User } from "@/types/auth";
+import { AuthUser, NextAuthType, Result, User } from "@/types/auth";
 import { createUser, findUserEmail, findUserSocialId } from "./db";
 import bcryptjs from "bcryptjs";
 import { WithId } from "mongodb";
+import {GEN_SALT_SIZE} from "@/constants/default";
 
 export const login = async (
   userEmail: string,
   userPassword: string
-): Promise<Resault<User>> => {
+): Promise<Result<User>> => {
   const user = await findUserEmail(userEmail);
   if (user) {
     if (!user.password) {
@@ -42,7 +43,7 @@ export const registration = async (
   userEmail: string,
   userPassword: string,
   userName: string
-): Promise<Resault<User>> => {
+): Promise<Result<User>> => {
   const isUser = await findUserEmail(userEmail);
   if (isUser) {
     return {
@@ -50,7 +51,7 @@ export const registration = async (
       status: 400,
     };
   }
-  const salt = await bcryptjs.genSalt(10);
+  const salt = await bcryptjs.genSalt(GEN_SALT_SIZE);
   const hashedPassword = await bcryptjs.hash(userPassword, salt);
   const user = await createUser({
     name: userName,

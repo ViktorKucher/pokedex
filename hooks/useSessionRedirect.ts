@@ -11,6 +11,5 @@ export const useSessionRedirect = () => {
       router.push(urlRedirect.current);
     }
   }, [data, router]);
-  const navigation = (url: string) => (urlRedirect.current = url);
-  return navigation;
+  return (url: string) => (urlRedirect.current = url);
 };

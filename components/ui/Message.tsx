@@ -18,7 +18,10 @@ export const TextMessageSuccess = ({
   );
 };
 
-
-
-
-
+export const TextMessageNeedText = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return <p className="text-sm text-gray-800">{children}</p>;
+};

@@ -1,11 +1,10 @@
 import { FormEvent, ChangeEvent } from "react";
-import { LoginAuthorize,RegistrationAuthorize } from "./auth";
 import { FormikErrors } from "formik";
 
 export type IInput = {
-    label: string, 
-    type: string, 
-    placeholder: string 
+    label: string,
+    type: string,
+    placeholder: string
 }
 export type IForm<T> = {
     title:String;

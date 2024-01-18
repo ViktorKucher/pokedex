@@ -5,7 +5,7 @@ import { Form } from "./ui/Form";
 import { SocialButtons } from "./SocialButtons";
 import { Button } from "./ui/Button";
 import Link from "next/link";
-import { VALIDATION_lOGIN_SCHEMA } from "@/constants/yupSchemas";
+import { VALIDATION_LOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
 import { EMPTY_STRING } from "@/constants/default";
@@ -28,11 +28,11 @@ export const Login = () => {
         res?.error && toast.error(res.error);
       });
     },
-    validationSchema: VALIDATION_lOGIN_SCHEMA,
+    validationSchema: VALIDATION_LOGIN_SCHEMA,
   });
 
   return (
-    <div className="flex flex-col m-0 gap-2">
+    <div className="flex flex-col m-0 gap-2 max-w-60">
       <Form
         title={"Login"}
         handleSubmit={formik.handleSubmit}
@@ -42,9 +42,9 @@ export const Login = () => {
         errors={formik.errors}
       />
       <span className="text-center">or</span>
-      <Button>
-        <Link href="/registration">Registration</Link>
-      </Button>
+      <Link href="/registration" className="block w-full">
+        <Button>Registration</Button>
+      </Link>
       <SocialButtons />
     </div>
   );
