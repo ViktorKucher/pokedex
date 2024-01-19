@@ -1,17 +1,20 @@
 import React from "react";
-import { FacebookIconSVG, GoogleIconSVG} from "./Icons";
+import { FacebookIconSVG, GoogleIconSVG } from "./Icons";
+import Link from "next/link";
 interface IButton {
   children: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "submit" | "button";
 }
-
+interface IButtonLink extends IButton{
+  href:string
+}
 const styleButton = {
   submit:
     "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
   button:
     "rounded-lg border-2 border-white p-3 hover:bg-gray-900 dark:hover:bg-gray-700",
-  undefined: "w-full rounded-lg p-3 bg-purple-800 hover:bg-purple-700",
+  undefined: "break-words w-full rounded-lg p-3 bg-purple-800 hover:bg-purple-700",
 };
 
 export const Button = ({ children, type, onClick }: IButton) => {
@@ -60,3 +63,10 @@ export const GoogleButton = ({
   );
 };
 
+export const ButtonLink = ({ children, type, href }: IButtonLink) => {
+  return (
+    <Link href={href} className="block w-full">
+      <Button type={type}>{children}</Button>
+    </Link>
+  );
+};
