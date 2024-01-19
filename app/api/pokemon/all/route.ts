@@ -8,7 +8,7 @@ export async function GET(req: NextResponse) {
     const offset = searchParams.get("offset");
     if (limit && offset) {
       const resaults = await getPokemons(limit, offset);
-      return NextResponse.json(resaults);
+      return NextResponse.json({pokemons:resaults},{status:200});
     }
     return NextResponse.json({ message: "Error request" }, { status: 400 });
   } catch {

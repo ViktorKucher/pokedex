@@ -3,7 +3,7 @@ import { signIn } from "next-auth/react";
 import { useFormik } from "formik";
 import { Form } from "./ui/Form";
 import { SocialButtons } from "./SocialButtons";
-import { Button } from "./ui/Button";
+import { Button, ButtonLink } from "./ui/Button";
 import Link from "next/link";
 import { VALIDATION_LOGIN_SCHEMA } from "@/constants/yupSchemas";
 import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
@@ -42,9 +42,7 @@ export const Login = () => {
         errors={formik.errors}
       />
       <span className="text-center">or</span>
-      <Link href="/registration" className="block w-full">
-        <Button>Registration</Button>
-      </Link>
+      <ButtonLink href="/registration">Registration</ButtonLink>
       <SocialButtons />
     </div>
   );
