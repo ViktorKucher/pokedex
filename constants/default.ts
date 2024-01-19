@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const EMPTY_STRING = "";
 
 export const MIN_LENGTH_YUP_NAME = 6;
@@ -15,3 +17,7 @@ export const ENCODING = "hex";
 export const STRATEGY_TOKEN = "jwt";
 
 export const SIZE_TOKEN = 32;
+
+export const POKEMON_API = axios.create({
+    baseURL: "https://pokeapi.co/api/v2/",
+  });
