@@ -1,4 +1,5 @@
 import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
+import { IoSearch } from "react-icons/io5";
 
 interface IInput {
   name?: string;
@@ -28,17 +29,26 @@ export const Input = ({
   error,
 }: IInput) => {
   return (
-    <>
-      <input
-        className={
-          error ? styleInput.error : styleInput[type as keyof typeof styleInput]
-        }
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        onChange={onChange}
-        value={value}
-      />
-    </>
+    <input
+      className={
+        error ? styleInput.error : styleInput[type as keyof typeof styleInput]
+      }
+      name={name}
+      placeholder={placeholder}
+      type={type}
+      onChange={onChange}
+      value={value}
+    />
+  );
+};
+
+export const SearchInput = () => {
+  return (
+    <div className="flex max-w-sm">
+      <Input placeholder="Name Pokemon" type="text" />
+      <div className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <IoSearch size={20} />
+      </div>
+    </div>
   );
 };
