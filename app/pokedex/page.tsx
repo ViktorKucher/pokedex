@@ -3,7 +3,7 @@ import { Header } from "@/components/pokedex/header/Header";
 
 export default function Pokedex() {
   return (
-    <main className=''>
+    <main>
       <Header/>
       <Body/>
     </main>
