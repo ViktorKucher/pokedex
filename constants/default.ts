@@ -17,7 +17,4 @@ export const ENCODING = "hex";
 export const STRATEGY_TOKEN = "jwt";
 
 export const SIZE_TOKEN = 32;
-
-export const POKEMON_API = axios.create({
-    baseURL: "https://pokeapi.co/api/v2/",
-  });
+export const BASE_POKEMON_URL="https://pokeapi.co/api/v2/"

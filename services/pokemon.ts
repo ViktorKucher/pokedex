@@ -1,4 +1,4 @@
-import { POKEMON_API } from "@/constants/default";
+import { BASE_POKEMON_URL } from "@/constants/default";
 import { PokemonType, StatsType } from "@/types/pokemon";
 import axios from "axios";
 
@@ -23,7 +23,7 @@ export const getDataPokemon = async (url: string): Promise<PokemonType> => {
     id: dataPokemon.id,
     name: dataPokemon.name,
     types,
-    picture: dataPokemon.sprites.front_default,
+    picture: dataPokemon.sprites.other['official-artwork'].front_default,
     baseExperience: dataPokemon.base_experience,
     abilities,
     stats,
@@ -34,11 +34,10 @@ export const getPokemons = async (
   limit: string,
   offset: string
 ): Promise<PokemonType[]> => {
-  const resault = await POKEMON_API.get(
-    `pokemon?limit=${limit}&offset=${offset}`
+  const resault = await axios.get(
+    `${BASE_POKEMON_URL}pokemon?limit=${limit}&offset=${offset}`
   );
   const data = await resault.data.results;
-  console.log(data);
   const promises = await data.map(
     async (pokemon: { name: string; url: string }) => {
       return await getDataPokemon(pokemon.url);
