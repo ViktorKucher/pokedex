@@ -31,3 +31,8 @@ export type PokemonRateType = {
   pokemon_id: string;
   ratings: { user_id: string; rate: number }[];
 };
+
+export type FollowPokemons ={
+  user_id:string,
+  following?:string[]
+}

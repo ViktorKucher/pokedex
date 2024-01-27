@@ -9,7 +9,7 @@ export const getAllPoremons = async (
   await axios.get(
     `${LOCAL_POKEMON_URL}all?limit=${limit}&offset=${offset}&user_id=${user_id}`
   );
-  
+
 export const setRate = async (
   pokemon_id: string,
   user_id: string,
@@ -21,5 +21,27 @@ export const setRate = async (
     rate,
   });
 
-export const getPokemonData = async (limit: number, offset: number) =>
+export const getPokemonsData = async (limit: number, offset: number) =>
   await axios.get(`${BASE_POKEMON_URL}pokemon?limit=${limit}&offset=${offset}`);
+
+export const getPokemonData = async (searchData: string, user_id: string) =>
+  await axios.get(
+    `${LOCAL_POKEMON_URL}?searchData=${searchData}&user_id=${user_id}`
+  );
+
+export const getFollowPokemons = async (user_id: string) =>
+  await axios.get(
+    `${LOCAL_POKEMON_URL}/follow?user_id=${user_id}`
+  );
+export const setFollowPokemons = async (pokemon_id: string, user_id: string) =>
+  await axios.put(`${LOCAL_POKEMON_URL}/follow`, {
+    pokemon_id,
+    user_id,
+  });
+export const deleteFollowPokemons = async (
+  pokemon_id: string,
+  user_id: string
+) =>
+  await axios.delete(
+    `${LOCAL_POKEMON_URL}/follow?pokemon_id=${pokemon_id}&user_id=${user_id}`
+  );

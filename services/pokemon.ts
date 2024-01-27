@@ -6,7 +6,7 @@ import {
   getAverageRate,
   updateRatePokemon,
 } from "./db";
-import { getPokemonData } from "@/constants/api";
+import { getPokemonsData } from "@/constants/api";
 
 export const getDataPokemon = async (url: string): Promise<PokemonDBType> => {
   const res = await axios.get(url);
@@ -41,7 +41,7 @@ export const getPokemons = async (
   offset: number,
   user_id: string
 ): Promise<PokemonType[]> => {
-  const resault = await getPokemonData(limit, offset);
+  const resault = await getPokemonsData(limit, offset);
   const data = await resault.data.results;
   const promises = await data.map(
     async (pokemon: { name: string; url: string }) => {
