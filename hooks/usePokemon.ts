@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSessionRedirect } from "./useSessionRedirect";
 
 export const useListPokemons = () => {
-  const { data} = useSession();
+  const { data } = useSession();
   useEffect(() => {
     usePokemonStore.persist.rehydrate();
   }, []);
