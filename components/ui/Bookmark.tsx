@@ -1,7 +1,7 @@
 import { formatCounterDate } from "@/functions/format";
 import { CiBookmark } from "react-icons/ci";
 
-export const BookmarkCounter = ({ count }: { count: number }) => {
+export const BookmarkCounter = ({ count }: { count?: number }) => {
   const value = formatCounterDate(count);
   return (
     <div className="relative">
