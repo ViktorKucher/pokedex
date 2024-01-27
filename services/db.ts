@@ -1,5 +1,5 @@
 import { AuthUser } from "@/types/auth";
-import { PokemonRateType } from "@/types/pokemon";
+import { FollowPokemons, PokemonRateType } from "@/types/pokemon";
 import { findIndexRate, findAverageRate } from "@/functions/rate";
 import { Collection, MongoClient, WithId } from "mongodb";
 
@@ -74,3 +74,42 @@ export const getAverageRate = async (
     return null;
   }
 };
+
+const connectFollowCollection = async (): Promise<
+  Collection<FollowPokemons>
+> => {
+  await client.connect();
+  const db = client.db("pokedex");
+  return db.collection<FollowPokemons>("folows");
+};
+
+export const addFollows = async (user_id: string, pokemon_id: string) => {
+  const data = await findFollowsPokemon(user_id);
+  if (!data) {
+    await (
+      await connectFollowCollection()
+    ).insertOne({ user_id, following: [pokemon_id] });
+    return { following: [pokemon_id] };
+  }
+  if (data && data.following && data.following.length >= 0) {
+    const following = [...data.following, pokemon_id];
+    await (
+      await connectFollowCollection()
+    ).updateOne({ user_id }, { $set: { following } });
+    return { following };
+  }
+  
+};
+export const deleteFollows = async (user_id: string, pokemon_id: string) => {
+  const data = await findFollowsPokemon(user_id);
+  const following = data?.following?.filter((item) => item != pokemon_id);
+  await (
+    await connectFollowCollection()
+  ).updateOne({ user_id }, { $set: { following } });
+  return { following };
+};
+
+export const findFollowsPokemon = async (
+  user_id: string
+): Promise<WithId<FollowPokemons> | null> =>
+  await (await connectFollowCollection()).findOne({ user_id });

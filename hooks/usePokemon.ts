@@ -2,14 +2,19 @@ import { usePokemonStore } from "@/store/pokemon";
 import { PokemonType } from "@/types/pokemon";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useSessionRedirect } from "./useSessionRedirect";
 
 export const useListPokemons = () => {
   const { data } = useSession();
-  const list = usePokemonStore((state) => state);
-  const initPokemons = list.initPokemons;
   useEffect(() => {
-    data && initPokemons(data?.user.id);
-  }, [initPokemons,list.limit,list.offset, data]);
+    usePokemonStore.persist.rehydrate();
+  }, []);
+  const list = usePokemonStore((state) => state);
+  useEffect(() => {
+    if (data?.user) {
+      list.initPokemons(data?.user.id);
+    }
+  }, [list.initPokemons, list.limit, list.offset]);
   return list;
 };
 
@@ -20,15 +25,10 @@ export const useDataPokemon = (id: string) => {
   useEffect(() => {
     if (!pokemons) return;
     const pokemon = pokemons.find((value) => value.id == id);
-    if (
-      pokemonData?.id != id ||
-      pokemonData?.ratings != pokemon?.ratings
-    ) {
-      setLoading(false);
-      setPokemonData(pokemon);
-    } else {
+    if (pokemonData?.id != id || pokemonData?.ratings != pokemon?.ratings) {
       setLoading(true);
+      setPokemonData(pokemon);
     }
-  }, [pokemonData, id, pokemons]);
+  }, [id, pokemons]);
   return { pokemonData, isloading, setRarings };
 };
