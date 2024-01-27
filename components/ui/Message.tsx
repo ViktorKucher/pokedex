@@ -23,5 +23,5 @@ export const TextMessageNeedText = ({
 }: {
   children: React.ReactNode;
 }) => {
-  return <p className="text-sm text-gray-800">{children}</p>;
+  return <p className="text-sm text-gray-800 dark:text-yellow-300">{children}</p>;
 };

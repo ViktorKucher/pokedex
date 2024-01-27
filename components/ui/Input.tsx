@@ -1,4 +1,10 @@
-import { ChangeEventHandler, HTMLInputTypeAttribute } from "react";
+import { useListPokemons } from "@/hooks/usePokemon";
+import { useSession } from "next-auth/react";
+import {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  useState,
+} from "react";
 import { IoSearch } from "react-icons/io5";
 
 interface IInput {
@@ -43,10 +49,29 @@ export const Input = ({
 };
 
 export const SearchInput = () => {
+  const { data } = useSession();
+  const { findPokemon, initPokemons } = useListPokemons();
+  const [searchData, setSearchData] = useState("");
+  const search = () => {
+    if (data?.user) {
+      if (searchData.length > 0) {
+        findPokemon(searchData, data.user.id);
+      } else {
+        initPokemons(data?.user.id);
+      }
+    }
+  };
   return (
     <div className="flex max-w-sm">
-      <Input placeholder="Name Pokemon" type="text" />
-      <div className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+      <Input
+        placeholder="Name or Id Pokemon"
+        type="text"
+        onChange={(event) => setSearchData(event.target.value)}
+      />
+      <div
+        onClick={search}
+        className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
         <IoSearch size={20} />
       </div>
     </div>

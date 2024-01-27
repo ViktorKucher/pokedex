@@ -1,7 +1,6 @@
 import { BASE_POKEMON_URL } from "@/constants/default";
 import { getAverageRate } from "@/services/db";
 import { getDataPokemon } from "@/services/pokemon";
-import { PokemonType } from "@/types/pokemon";
 import { NextResponse } from "next/server";
 
 export async function GET(req: NextResponse) {
