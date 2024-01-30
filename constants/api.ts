@@ -24,7 +24,7 @@ export const setRate = async (
 export const getPokemonsData = async (limit: number, offset: number) =>
   await axios.get(`${BASE_POKEMON_URL}pokemon?limit=${limit}&offset=${offset}`);
 
-export const getPokemonData = async (searchData: string, user_id: string) =>
+export const getPokemonData = async (searchData: string, user_id?: string) =>
   await axios.get(
     `${LOCAL_POKEMON_URL}?searchData=${searchData}&user_id=${user_id}`
   );
@@ -33,11 +33,13 @@ export const getFollowPokemons = async (user_id: string) =>
   await axios.get(
     `${LOCAL_POKEMON_URL}/follow?user_id=${user_id}`
   );
+  
 export const setFollowPokemons = async (pokemon_id: string, user_id: string) =>
   await axios.put(`${LOCAL_POKEMON_URL}/follow`, {
     pokemon_id,
     user_id,
   });
+
 export const deleteFollowPokemons = async (
   pokemon_id: string,
   user_id: string

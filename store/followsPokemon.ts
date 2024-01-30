@@ -9,7 +9,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 type FollowPokemonStore = {
-  isloading: boolean;
+  isLoading: boolean;
   listFollows?: string[];
   pokemons?: PokemonType[];
   initFollowPokemons: (user_id: string) => Promise<any>;
@@ -24,18 +24,18 @@ export const useFollowPokemonStore = create<
 >(
   persist(
     (set, get) => ({
-      isloading: false,
+      isLoading: false,
       follow: async (pokemon_id: string, user_id: string) => {
-        set({ isloading: false });
+        set({ isLoading: false });
         const listFollows = await setFollowPokemons(pokemon_id, user_id);
-        set({ listFollows: listFollows.data, isloading: true });
+        set({ listFollows: listFollows.data, isLoading: true });
       },
       unfollow: async (pokemon_id: string, user_id: string) => {
-        set({ isloading: false });
+        set({ isLoading: false });
         const listFollows = await deleteFollowPokemons(pokemon_id, user_id);
         set({
           listFollows: listFollows.data.pokemons.following,
-          isloading: true,
+          isLoading: true,
         });
       },
       initFollowPokemons: async (user_id) => {

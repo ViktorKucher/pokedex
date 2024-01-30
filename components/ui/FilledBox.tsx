@@ -1,11 +1,8 @@
-import { FrownFilled } from "@ant-design/icons";
+import { Empty } from "antd";
 
 export const FilledBox = () => (
-  <div className="flex flex-col justify-center justify-items-center text-center gap-2">
-    <FrownFilled
-      className="flex flex-col justify-center"
-      style={{ fontSize: "40px" }}
-    />
-    <div className="uppercase">Not found</div>
+  <div className="flex flex-col mx-auto my-5 text-center align-middle justify-center">
+    <Empty />
+    <div>Not data</div>
   </div>
 );

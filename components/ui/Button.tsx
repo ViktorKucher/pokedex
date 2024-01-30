@@ -7,7 +7,8 @@ interface IButton {
   type?: "submit" | "button";
 }
 interface IButtonLink extends IButton{
-  href:string
+  href:string,
+  style?:string
 }
 const styleButton = {
   submit:
@@ -63,9 +64,9 @@ export const GoogleButton = ({
   );
 };
 
-export const ButtonLink = ({ children, type, href }: IButtonLink) => {
+export const ButtonLink = ({ children, type, href,style }: IButtonLink) => {
   return (
-    <Link href={href} className="block w-full">
+    <Link href={href} className={`block w-full ${style}`}>
       <Button type={type}>{children}</Button>
     </Link>
   );

@@ -1,10 +1,5 @@
-import { useListPokemons } from "@/hooks/usePokemon";
 import { useSession } from "next-auth/react";
-import {
-  ChangeEventHandler,
-  HTMLInputTypeAttribute,
-  useState,
-} from "react";
+import { ChangeEventHandler, HTMLInputTypeAttribute, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 
 interface IInput {
@@ -48,19 +43,14 @@ export const Input = ({
   );
 };
 
-export const SearchInput = () => {
-  const { data } = useSession();
-  const { findPokemon, initPokemons } = useListPokemons();
+export const SearchInput = ({
+  getDataInput,
+}: {
+  getDataInput: (text: string) => void;
+}) => {
   const [searchData, setSearchData] = useState("");
-  const search = () => {
-    if (data?.user) {
-      if (searchData.length > 0) {
-        findPokemon(searchData, data.user.id);
-      } else {
-        initPokemons(data?.user.id);
-      }
-    }
-  };
+  const onClick = () => getDataInput(searchData);
+
   return (
     <div className="flex max-w-sm">
       <Input
@@ -69,7 +59,7 @@ export const SearchInput = () => {
         onChange={(event) => setSearchData(event.target.value)}
       />
       <div
-        onClick={search}
+        onClick={onClick}
         className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         <IoSearch size={20} />
