@@ -1,8 +1,5 @@
 "use client";
-
-import { Header } from "@/components/pokedex/header/Header";
 import { CardPokemon } from "@/components/ui/Card";
-import { Title } from "@/components/ui/Title";
 import { useFollowPokemonStore } from "@/store/followsPokemon";
 import { PokemonType } from "@/types/pokemon";
 import { useSession } from "next-auth/react";

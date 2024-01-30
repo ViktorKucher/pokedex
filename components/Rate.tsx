@@ -8,6 +8,6 @@ export const AverageRate = ({ rate }: { rate?: number }) => (
           style={{ color: "yellow" }}
         />
       </div>
-      <div>{rate || 0}</div>
+      <div>{ rate?Math.round(rate * 10) / 10: 0}</div>
     </div>
   );
