@@ -1,15 +1,18 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import Link from "next/link";
 import { Button, ButtonLink } from "./ui/Button";
 import { Login } from "./Login";
-import { Loader } from "./ui/Loader";
+import { Spin } from "antd";
 
 export const AuthorizationBody = () => {
   const { data, status } = useSession();
   switch (status) {
     case "loading":
-      return <Loader typeLoading="fullPage" />;
+      return <div className="flex justify-start align-middle min-h-screen min-w-screen">
+      <Spin tip="Loading" size="large">
+        <div className="content" />
+      </Spin>
+    </div>;;
     case "unauthenticated":
       return <Login />;
     case "authenticated":

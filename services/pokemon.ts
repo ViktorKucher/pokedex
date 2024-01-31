@@ -29,7 +29,7 @@ export const getDataPokemon = async (url: string): Promise<PokemonDBType> => {
     id: dataPokemon.id,
     name: dataPokemon.name,
     types,
-    picture: dataPokemon.sprites.other["official-artwork"].front_default,
+    picture: dataPokemon.sprites.other["home"].front_default,
     baseExperience: dataPokemon.base_experience,
     abilities,
     stats,

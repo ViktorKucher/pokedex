@@ -6,15 +6,22 @@ import Link from "next/link";
 import { useFollowPokemonStore } from "@/store/followsPokemon";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const { listFollows, initFollowPokemons } = useFollowPokemonStore();
-  const { data } = useSession();
+  const { data, status } = useSession();
+  const router = useRouter();
   useEffect(() => {
     if (data?.user) {
       initFollowPokemons(data.user.id);
     }
   }, [data]);
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status]);
   return (
     <header className="flex justify-between items-center gap-1 px-5 py-2 ">
       <div>

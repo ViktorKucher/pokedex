@@ -1,3 +1,4 @@
+import { formatRate } from "@/functions/default";
 import { StarFilled } from "@ant-design/icons";
 
 export const AverageRate = ({ rate }: { rate?: number }) => (
@@ -8,6 +9,6 @@ export const AverageRate = ({ rate }: { rate?: number }) => (
           style={{ color: "yellow" }}
         />
       </div>
-      <div>{rate || 0}</div>
+      <div>{formatRate(rate)}</div>
     </div>
   );

@@ -1,12 +1,12 @@
 "use client";
 import { PokemonType } from "@/types/pokemon";
-import Image from "next/image";
 import { ButtonLink } from "./Button";
 import { AverageRate } from "../Rate";
 import { HeartFilled } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { useFollowPokemonStore } from "@/store/followsPokemon";
 import { useSession } from "next-auth/react";
+import { Image } from "./Image";
 
 export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
   const [followPokemon, setFollowPokemon] = useState(false);
@@ -39,13 +39,9 @@ export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
         <Image
           src={cardData.picture}
           alt="profile"
-          width="0"
-          height="0"
-          sizes="100vw"
-          className="w-full h-auto"
-          loading="lazy"
+          style="w-full h-auto"
         />
-        <span className="text-center capitalize">{cardData.name}</span>
+        <span className="text-center capitalize">{cardData.id} {cardData.name}</span>
         <ButtonLink href={`/pokedex/pokemon/${cardData.id}`}>
           More details
         </ButtonLink>
