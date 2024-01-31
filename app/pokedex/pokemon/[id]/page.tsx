@@ -3,8 +3,8 @@ import { Datails } from "@/components/info/Datails";
 import { MainInfo } from "@/components/info/MainInfo";
 import { ButtonLink } from "@/components/ui/Button";
 import { FilledBox } from "@/components/ui/FilledBox";
-import { Loader } from "@/components/ui/Loader";
 import { useDataPokemon } from "@/hooks/usePokemon";
+import { Spin } from "antd";
 import { useSession } from "next-auth/react";
 
 const PokemonInfo = ({ params }: { params: { id: string } }) => {
@@ -14,14 +14,18 @@ const PokemonInfo = ({ params }: { params: { id: string } }) => {
     data?.user && setRarings(params.id, data.user.id, rate);
   };
   if (!isloading) {
-    return <Loader typeLoading="fullPage" />;
+    return <div className="m-20 min-h-screen min-w-screen">
+    <Spin tip="Loading" size="large">
+      <div className="content" />
+    </Spin>
+  </div>;
   }
   if (!pokemonData) {
     return <FilledBox />;
   }
   return (
     pokemonData && (
-      <div className="flex flex-wrap md:justify-center content-center h-full md:h-screen sm:gap-3 p-2  dark:bg-gray-800">
+      <div className="flex flex-wrap md:justify-center content-center h-full min-h-screen sm:gap-3 p-2  dark:bg-gray-800">
         <ButtonLink href="/pokedex" style="w-28">
           Return
         </ButtonLink>

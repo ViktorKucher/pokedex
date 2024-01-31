@@ -1,4 +1,5 @@
 import { getPokemonData } from "@/constants/api";
+import { isZero } from "@/functions/default";
 import { PokemonType } from "@/types/pokemon";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -19,35 +20,38 @@ export const useInfinitiScroll = () => {
         `http://localhost:3000/api/pokemon/all?limit=${limit}&offset=${offset}&user_id=${session.data?.user.id}`
       )
       .then((res) => {
-        if (res.data.length === 0 || res.data.length < limit) {
+        if (isZero(res.data.length) || res.data.length < limit) {
           setMaxLenght(true);
-        } else if (offset === 0) {
+        } else if (isZero(offset)) {
           setData(res.data);
         } else {
           setData((pre) => [...pre, ...res.data]);
         }
+        setLoading(true);
       })
       .catch(() => {
         setLoading(true);
         setData([]);
       });
 
-    setLoading(true);
+    
   };
   const search = (text: string) => {
     if (isLoading) {
       if (text?.length > 0) {
         setLoading(false);
+        setData([]);
         getPokemonData(text, session?.data?.user.id)
           .then((res) => {
             setData([res.data.pokemon]);
+            setMaxLenght(true)
             setLoading(true);
           })
           .catch(() => {
-            setData([]);
             setLoading(true);
           });
       } else {
+        setMaxLenght(false)
         setOffset(0);
         getListPokemons();
       }

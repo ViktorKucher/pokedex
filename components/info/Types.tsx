@@ -1,14 +1,8 @@
 import { listStyleType } from "@/constants/list";
-import { useEffect, useState } from "react";
 
 export const TypeValue = ({value}:{ value: string }) =>{
-  const [color,setColor]=useState('')
-  useEffect(()=>{
-    setColor(listStyleType[value as keyof typeof listStyleType])
-    console.log(color)
-  },[])
   return (
-    <div className={`p-1 rounded-lg ${color}`} key={value}>
+    <div style={{backgroundColor:listStyleType[value as keyof typeof listStyleType]}} key={value}>
       {value}
     </div>
   );

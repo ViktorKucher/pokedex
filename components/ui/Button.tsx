@@ -38,7 +38,7 @@ export const FacebookButton = ({
   return (
     <button
       type="button"
-      className="text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55"
+      className="text-white bg-[#51983b] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55"
       onClick={onClick}
     >
       <FacebookIconSVG />
@@ -66,7 +66,7 @@ export const GoogleButton = ({
 
 export const ButtonLink = ({ children, type, href,style }: IButtonLink) => {
   return (
-    <Link href={href} className={`block w-full ${style}`}>
+    <Link href={href} className={`block ${style}`}>
       <Button type={type}>{children}</Button>
     </Link>
   );

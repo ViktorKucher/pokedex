@@ -1,4 +1,4 @@
-import { formatCounterDate } from "@/functions/format";
+import { formatCounterDate } from "@/functions/default";
 import { CiBookmark } from "react-icons/ci";
 
 export const BookmarkCounter = ({ count }: { count?: number }) => {
