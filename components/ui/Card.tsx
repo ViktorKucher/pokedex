@@ -22,7 +22,6 @@ export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
   }, [listFollows,cardData]);
 
   const onFollow = () => {
-    console.log("onFollow");
     if (data?.user.id) {
       if (!followPokemon) {
         follow(cardData.id, data.user.id);
@@ -41,7 +40,7 @@ export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
           alt="profile"
           style="w-full h-auto"
         />
-        <span className="text-center capitalize">{cardData.id} {cardData.name}</span>
+        <span className="text-center capitalize">{cardData.name}</span>
         <ButtonLink href={`/pokedex/pokemon/${cardData.id}`}>
           More details
         </ButtonLink>

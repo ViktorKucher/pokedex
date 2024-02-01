@@ -8,11 +8,9 @@ export const AuthorizationBody = () => {
   const { data, status } = useSession();
   switch (status) {
     case "loading":
-      return <div className="flex justify-start align-middle min-h-screen min-w-screen">
-      <Spin tip="Loading" size="large">
-        <div className="content" />
-      </Spin>
-    </div>;;
+      return <div className="flex justify-center self-center items-center h-screen w-screen">
+      <Spin tip="Loading" size="large"></Spin>
+    </div>;
     case "unauthenticated":
       return <Login />;
     case "authenticated":

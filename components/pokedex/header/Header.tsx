@@ -7,6 +7,7 @@ import { useFollowPokemonStore } from "@/store/followsPokemon";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { MdCatchingPokemon } from "react-icons/md";
 
 export const Header = () => {
   const { listFollows, initFollowPokemons } = useFollowPokemonStore();
@@ -28,10 +29,15 @@ export const Header = () => {
         <SiPokemon size={100} color="yellow" />
       </div>
       <div className="flex items-center gap-2">
+        
+        <Link href={"/pokedex"}>
+          <MdCatchingPokemon size={40} />
+        </Link>
         <DropMenu />
         <Link href={"/pokedex/follows"}>
           <BookmarkCounter count={listFollows?.length} />
         </Link>
+        
       </div>
     </header>
   );
