@@ -15,10 +15,8 @@ const PokemonInfo = ({ params }: { params: { id: string } }) => {
   };
   if (!isloading) {
     return (
-      <div className="m-20 min-h-screen min-w-screen">
-        <Spin tip="Loading" size="large">
-          <div className="content" />
-        </Spin>
+      <div className="flex justify-center items-center min-h-screen min-w-screen text-center">
+        <Spin size="large"></Spin>
       </div>
     );
   }
@@ -26,10 +24,10 @@ const PokemonInfo = ({ params }: { params: { id: string } }) => {
     return <FilledBox />;
   }
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen min-w-screen">
       <Header />
       {pokemonData && (
-        <div className="flex flex-wrap content-center sm:gap-3 px-6">
+        <div className="flex flex-wrap content-center sm:gap-3 px-6 text-black dark:text-white">
           <MainInfo onChangeRate={onChangeRate} pokemonData={pokemonData} />
           <Datails
             types={pokemonData.types}

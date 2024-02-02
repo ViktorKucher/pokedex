@@ -9,6 +9,7 @@ import { LIST_LOGIN_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
 import { EMPTY_STRING } from "@/constants/default";
 import { toast } from "sonner";
+import { SwitchTheme } from "./SwitchTheme";
 
 export const Login = () => {
   const navigation = useSessionRedirect();
@@ -30,8 +31,9 @@ export const Login = () => {
     validationSchema: VALIDATION_LOGIN_SCHEMA,
   });
 
+  
   return (
-    <div className="flex flex-col m-0 gap-2 max-w-60">
+    <div className="flex flex-col m-0 gap-2 max-w-60 rounded-lg">
       <Form
         title={"Login"}
         handleSubmit={formik.handleSubmit}
@@ -40,9 +42,10 @@ export const Login = () => {
         list={LIST_LOGIN_INPUTS}
         errors={formik.errors}
       />
-      <span className="text-center">or</span>
+      <span className="text-center text-black dark:text-white">or</span>
       <ButtonLink href="/registration">Registration</ButtonLink>
       <SocialButtons />
+      <SwitchTheme style="absolute top-2 right-2"/>
     </div>
   );
 };
