@@ -2,7 +2,7 @@ import { listStyleType } from "@/constants/list";
 
 export const TypeValue = ({value}:{ value: string }) =>{
   return (
-    <div style={{backgroundColor:listStyleType[value as keyof typeof listStyleType]}} key={value}>
+    <div style={{backgroundColor:listStyleType[value as keyof typeof listStyleType]}} className={'rounded-lg p-1 text-white'} key={value}>
       {value}
     </div>
   );

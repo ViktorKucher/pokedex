@@ -22,7 +22,6 @@ export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
   }, [listFollows,cardData]);
 
   const onFollow = () => {
-    console.log("onFollow");
     if (data?.user.id) {
       if (!followPokemon) {
         follow(cardData.id, data.user.id);
@@ -35,13 +34,13 @@ export const CardPokemon = ({ cardData }: { cardData: PokemonType }) => {
   };
   return (
     <section className="relative w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/6 object-contain ">
-      <div className="m-1 border-2 border-gray-200 rounded-lg p-2 dark:hover:bg-gray-700 dark:bg-gray-800 dark:border-gray-700">
+      <div className="m-1 border-2  rounded-lg p-2 hover:bg-gray-700 bg-gray-800 border-gray-700">
         <Image
           src={cardData.picture}
           alt="profile"
           style="w-full h-auto"
         />
-        <span className="text-center capitalize">{cardData.id} {cardData.name}</span>
+        <span className="text-center capitalize">{cardData.name}</span>
         <ButtonLink href={`/pokedex/pokemon/${cardData.id}`}>
           More details
         </ButtonLink>

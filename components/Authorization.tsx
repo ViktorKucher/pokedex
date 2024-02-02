@@ -8,11 +8,11 @@ export const AuthorizationBody = () => {
   const { data, status } = useSession();
   switch (status) {
     case "loading":
-      return <div className="flex justify-start align-middle min-h-screen min-w-screen">
-      <Spin tip="Loading" size="large">
-        <div className="content" />
-      </Spin>
-    </div>;;
+      return (
+        <div className="flex justify-center items-center min-h-screen min-w-screen text-center">
+          <Spin size="large"></Spin>
+        </div>
+      );
     case "unauthenticated":
       return <Login />;
     case "authenticated":
@@ -21,7 +21,9 @@ export const AuthorizationBody = () => {
           <ButtonLink href="/pokedex">
             Continue with this account: {data.user?.name}
           </ButtonLink>
-          <Button onClick={() => signOut({ redirect: false })}>
+          <Button
+            onClick={() => signOut({ redirect: false, callbackUrl: "/" })}
+          >
             Change account
           </Button>
         </>
@@ -31,7 +33,7 @@ export const AuthorizationBody = () => {
 
 export const Authorization = () => {
   return (
-    <div className="flex flex-col m-0 gap-2 w-full max-w-64 items-center p-0 h-screen justify-center">
+    <div className="flex flex-col m-0 gap-2 w-full max-w-64 items-center p-0 h-screen justify-center bg-white dark:bg-black">
       <AuthorizationBody />
     </div>
   );

@@ -9,6 +9,7 @@ import { LIST_REGISTRATION_INPUTS } from "@/constants/inputs";
 import { useSessionRedirect } from "@/hooks/useSessionRedirect";
 import { EMPTY_STRING } from "@/constants/default";
 import { toast } from "sonner";
+import { SwitchTheme } from "./SwitchTheme";
 
 export const Registration = () => {
   const navigation = useSessionRedirect();
@@ -32,7 +33,7 @@ export const Registration = () => {
   });
 
   return (
-    <div className="flex flex-col m-0 gap-2 max-w-60">
+    <div className="flex flex-col m-0 gap-2 max-w-60 bg-white dark:bg-black">
       <Form
         title={"Registration"}
         handleSubmit={formik.handleSubmit}
@@ -44,6 +45,7 @@ export const Registration = () => {
       <span className="text-center">or</span>
       <ButtonLink href="/">Login</ButtonLink>
       <SocialButtons />
+      <SwitchTheme style="absolute top-2 right-2"/>
     </div>
   );
 };

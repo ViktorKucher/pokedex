@@ -13,9 +13,9 @@ export const MainInfo = ({
 }) => {
   return (
     pokemonData && (
-      <div className="w-full md:w-auto">
+      <div className="w-full md:w-1/2 lg:w-1/3">
         {pokemonData.picture && (
-          <Image src={pokemonData.picture} style={'w-full sm:w-72 h-auto'} alt="profile" />
+          <Image src={pokemonData.picture} style={'w-full h-auto'} alt="profile" />
         )}
         <p className="capitalize">
           #{pokemonData.id} {pokemonData.name}{" "}

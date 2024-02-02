@@ -7,7 +7,7 @@ type StatsType = {
     'special-defense':number
 }
 export const StatsPokemon = ({stats}:{stats:StatsType}) => (
-  <div className="bg-blue-600 rounded-md p-2 uppercase">
+  <div className="bg-blue-600 rounded-md p-2 uppercase text-white">
     <div>Stats</div>
     <div>hp: {stats.hp}</div>
     <div>attack: {stats.attack}</div>

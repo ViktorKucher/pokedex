@@ -11,7 +11,7 @@ interface IInput {
   error?: string;
 }
 
-const STYLE_DEFAULT_INPUT = "text-black p-2 rounded-md w-full";
+const STYLE_DEFAULT_INPUT = "text-black border-2 border-black p-2 rounded-md w-full";
 
 const styleInput = {
   text: STYLE_DEFAULT_INPUT,

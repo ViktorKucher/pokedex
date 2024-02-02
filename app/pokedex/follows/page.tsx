@@ -1,16 +1,10 @@
 import { FollowsList } from "@/components/Follows";
 import { Header } from "@/components/pokedex/header/Header";
-import { ButtonLink } from "@/components/ui/Button";
-import { Title } from "@/components/ui/Title";
 
 export default function Pokedex() {
   return (
-    <main className="text-center">
+    <main className="min-h-screen min-w-screen text-center">
       <Header />
-      <ButtonLink href="/pokedex" style="w-28">
-        Return
-      </ButtonLink>
-      <Title>Follows</Title>
       <FollowsList />
     </main>
   );
